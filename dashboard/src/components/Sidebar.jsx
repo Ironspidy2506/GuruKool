@@ -1,0 +1,308 @@
+import React, { useContext } from "react";
+import { NavLink } from "react-router-dom";
+import { AdminContext } from "../context/AdminContext.jsx";
+import { GrDashboard } from "react-icons/gr";
+import { MdDashboard } from "react-icons/md";
+import { FaChartLine, FaTasks } from "react-icons/fa";
+import { FaUser, FaUsers } from "react-icons/fa6";
+import { UserContext } from "../context/UserContext.jsx";
+import { ManagerContext } from "../context/ManagerContext.jsx";
+import { LuLogs } from "react-icons/lu";
+import { PiChalkboardTeacherDuotone } from "react-icons/pi";
+import { PiStudentDuotone } from "react-icons/pi";
+
+
+const Sidebar = ({ isOpen, toggleSidebar }) => {
+  const { atoken } = useContext(AdminContext);
+  const { mtoken } = useContext(ManagerContext);
+  const { token } = useContext(UserContext);
+
+  const handleOverlayClick = (e) => {
+    if (e.target.id === "overlay") {
+      toggleSidebar();
+    }
+  };
+
+  return (
+    <>
+      {(atoken || mtoken || token) && isOpen && (
+        <div
+          id="overlay"
+          className="fixed inset-0  md:hidden"
+          onClick={handleOverlayClick}
+        ></div>
+      )}
+
+      <aside
+        className={`fixed inset-y-0 top-16 left-0 bg-white dark:bg-gray-900 shadow-md w-64 transform ${
+          isOpen ? "translate-x-0" : "-translate-x-full"
+        } md:translate-x-0 transition-transform duration-300 ease-in-out`}
+      >
+        <nav className="flex flex-col mt-10 px-6 pb-6 space-y-6">
+          {/* Admin Links */}
+          {atoken && (
+            <>
+              <NavLink
+                to="/admin-dashboard"
+                className={({ isActive }) =>
+                  `flex items-center space-x-3 text-sm font-medium px-4 py-2 rounded-md ${
+                    isActive
+                      ? "bg-green-100 text-green-600 dark:bg-green-800 dark:text-white"
+                      : "text-gray-700 hover:bg-green-200 dark:text-gray-300 dark:hover:bg-green-700"
+                  }`
+                }
+                onClick={toggleSidebar}
+              >
+                <GrDashboard className="text-lg" />
+                <span className="text-md">Dashboard</span>
+              </NavLink>
+
+              <NavLink
+                to="/students"
+                className={({ isActive }) =>
+                  `flex items-center space-x-3 text-sm font-medium px-4 py-2 rounded-md ${
+                    isActive
+                      ? "bg-green-100 text-green-600 dark:bg-green-800 dark:text-white"
+                      : "text-gray-700 hover:bg-green-200 dark:text-gray-300 dark:hover:bg-green-700"
+                  }`
+                }
+                onClick={toggleSidebar}
+              >
+                <PiStudentDuotone className="text-lg" />
+                <span className="text-md">
+                  Students
+                </span>
+              </NavLink>
+              <NavLink
+                to="/teachers"
+                className={({ isActive }) =>
+                  `flex items-center space-x-3 text-sm font-medium px-4 py-2 rounded-md ${
+                    isActive
+                      ? "bg-green-100 text-green-600 dark:bg-green-800 dark:text-white"
+                      : "text-gray-700 hover:bg-green-200 dark:text-gray-300 dark:hover:bg-green-700"
+                  }`
+                }
+                onClick={toggleSidebar}
+              >
+                <PiChalkboardTeacherDuotone className="text-lg" />
+                <span className="text-md">Teachers</span>
+              </NavLink>
+              <NavLink
+                to="/staffs"
+                className={({ isActive }) =>
+                  `flex items-center space-x-3 text-sm font-medium px-4 py-2 rounded-md ${
+                    isActive
+                      ? "bg-green-100 text-green-600 dark:bg-green-800 dark:text-white"
+                      : "text-gray-700 hover:bg-green-200 dark:text-gray-300 dark:hover:bg-green-700"
+                  }`
+                }
+                onClick={toggleSidebar}
+              >
+                <FaUsers className="text-lg" />
+                <span className="text-md">Staffs</span>
+              </NavLink>
+            </>
+          )}
+
+          {/* Manager Links */}
+          {mtoken && (
+            <>
+              <NavLink
+                to="/manager-dashboard"
+                className={({ isActive }) =>
+                  `flex items-center space-x-3 text-sm font-medium px-4 py-2 rounded-md transition ${
+                    isActive
+                      ? "bg-green-100 text-green-600"
+                      : "text-gray-700 hover:bg-green-200"
+                  }`
+                }
+                onClick={toggleSidebar}
+              >
+                <GrDashboard className="text-lg" />
+                <span className="text-md">Dashboard</span>
+              </NavLink>
+              <NavLink
+                to="/manager-projects"
+                className={({ isActive }) =>
+                  `flex items-center space-x-3 text-sm font-medium px-4 py-2 rounded-md transition ${
+                    isActive
+                      ? "bg-green-100 text-green-600"
+                      : "text-gray-700 hover:bg-green-200"
+                  }`
+                }
+                onClick={toggleSidebar}
+              >
+                <MdDashboard className="text-lg" />
+                <span className="text-md">Projects</span>
+              </NavLink>
+              <NavLink
+                to="/manager-tasks"
+                className={({ isActive }) =>
+                  `flex items-center space-x-3 text-sm font-medium px-4 py-2 rounded-md transition ${
+                    isActive
+                      ? "bg-green-100 text-green-600"
+                      : "text-gray-700 hover:bg-green-200"
+                  }`
+                }
+                onClick={toggleSidebar}
+              >
+                <FaTasks className="text-lg" />
+                <span className="text-md">Tasks</span>
+              </NavLink>
+
+              <NavLink
+                to="/manager-performance"
+                className={({ isActive }) =>
+                  `flex items-center space-x-3 text-sm font-medium px-4 py-2 rounded-md transition ${
+                    isActive
+                      ? "bg-green-100 text-green-600"
+                      : "text-gray-700 hover:bg-green-200"
+                  }`
+                }
+                onClick={toggleSidebar}
+              >
+                <FaChartLine className="text-lg" />
+                <span className="text-md">Performance</span>
+              </NavLink>
+              <NavLink
+                to="/manager-employees"
+                className={({ isActive }) =>
+                  `flex items-center space-x-3 text-sm font-medium px-4 py-2 rounded-md transition ${
+                    isActive
+                      ? "bg-green-100 text-green-600"
+                      : "text-gray-700 hover:bg-green-200"
+                  }`
+                }
+                onClick={toggleSidebar}
+              >
+                <FaUsers className="text-lg" />
+                <span className="text-md">Employees</span>
+              </NavLink>
+              <NavLink
+                to="/manager-logs"
+                className={({ isActive }) =>
+                  `flex items-center space-x-3 text-sm font-medium px-4 py-2 rounded-md transition ${
+                    isActive
+                      ? "bg-green-100 text-green-600"
+                      : "text-gray-700 hover:bg-green-200"
+                  }`
+                }
+                onClick={toggleSidebar}
+              >
+                <LuLogs className="text-lg" />
+                <span className="text-md">Logs</span>
+              </NavLink>
+              <NavLink
+                to="/manager-profile"
+                className={({ isActive }) =>
+                  `flex items-center space-x-3 text-sm font-medium px-4 py-2 rounded-md transition ${
+                    isActive
+                      ? "bg-green-100 text-green-600"
+                      : "text-gray-700 hover:bg-green-200"
+                  }`
+                }
+                onClick={toggleSidebar}
+              >
+                <FaUser className="text-lg" />
+                <span className="text-md">Profile</span>
+              </NavLink>
+            </>
+          )}
+
+          {/* Employee Links */}
+          {token && (
+            <>
+              <NavLink
+                to="/employee-dashboard"
+                className={({ isActive }) =>
+                  `flex items-center space-x-3 text-sm font-medium px-4 py-2 rounded-md transition ${
+                    isActive
+                      ? "bg-green-100 text-green-600"
+                      : "text-gray-700 hover:bg-green-200"
+                  }`
+                }
+                onClick={toggleSidebar}
+              >
+                <GrDashboard className="text-lg" />
+                <span>Dashboard</span>
+              </NavLink>
+              <NavLink
+                to="/employee-projects"
+                className={({ isActive }) =>
+                  `flex items-center space-x-3 text-sm font-medium px-4 py-2 rounded-md transition ${
+                    isActive
+                      ? "bg-green-100 text-green-600"
+                      : "text-gray-700 hover:bg-green-200"
+                  }`
+                }
+                onClick={toggleSidebar}
+              >
+                <MdDashboard className="text-lg" />
+                <span className="text-md">My Projects</span>
+              </NavLink>
+              <NavLink
+                to="/employee-tasks"
+                className={({ isActive }) =>
+                  `flex items-center space-x-3 text-sm font-medium px-4 py-2 rounded-md transition ${
+                    isActive
+                      ? "bg-green-100 text-green-600"
+                      : "text-gray-700 hover:bg-green-200"
+                  }`
+                }
+                onClick={toggleSidebar}
+              >
+                <FaTasks className="text-lg" />
+                <span className="text-md">My Tasks</span>
+              </NavLink>
+
+              <NavLink
+                to="/employee-performance"
+                className={({ isActive }) =>
+                  `flex items-center space-x-3 text-sm font-medium px-4 py-2 rounded-md transition ${
+                    isActive
+                      ? "bg-green-100 text-green-600"
+                      : "text-gray-700 hover:bg-green-200"
+                  }`
+                }
+                onClick={toggleSidebar}
+              >
+                <FaChartLine className="text-lg" />
+                <span className="text-md">My Performance</span>
+              </NavLink>
+              <NavLink
+                to="/employee-logs"
+                className={({ isActive }) =>
+                  `flex items-center space-x-3 text-sm font-medium px-4 py-2 rounded-md transition ${
+                    isActive
+                      ? "bg-green-100 text-green-600"
+                      : "text-gray-700 hover:bg-green-200"
+                  }`
+                }
+                onClick={toggleSidebar}
+              >
+                <LuLogs className="text-lg" />
+                <span className="text-md">My Logs</span>
+              </NavLink>
+              <NavLink
+                to="/employee-profile"
+                className={({ isActive }) =>
+                  `flex items-center space-x-3 text-sm font-medium px-4 py-2 rounded-md transition ${
+                    isActive
+                      ? "bg-green-100 text-green-600"
+                      : "text-gray-700 hover:bg-green-200"
+                  }`
+                }
+                onClick={toggleSidebar}
+              >
+                <FaUser className="text-lg" />
+                <span className="text-md">My Profile</span>
+              </NavLink>
+            </>
+          )}
+        </nav>
+      </aside>
+    </>
+  );
+};
+
+export default Sidebar;
