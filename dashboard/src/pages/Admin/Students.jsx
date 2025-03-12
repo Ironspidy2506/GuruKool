@@ -1,34 +1,33 @@
-import React, { useState, useEffect } from "react";
-import { FaPlus, FaEdit, FaTrash, FaMoon, FaSun } from "react-icons/fa";
+import React, { useState, useEffect, useContext } from "react";
+import { FaPlus, FaEdit, FaTrash, FaSearch } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-
-// Sample student data (Replace with API fetch)
-const sampleStudents = [
-  {
-    id: 1,
-    name: "John Doe",
-    email: "john@example.com",
-    class: "10",
-    section: "A",
-    roll: 101,
-  },
-  {
-    id: 2,
-    name: "Jane Smith",
-    email: "jane@example.com",
-    class: "12",
-    section: "B",
-    roll: 202,
-  },
-];
+import { AdminContext } from "../../context/AdminContext.jsx";
 
 const Students = () => {
   const navigate = useNavigate();
-  const [students, setStudents] = useState(sampleStudents);
+  const { atoken, students, setStudents, getStudents } =
+    useContext(AdminContext);
   const [darkMode, setDarkMode] = useState(
     localStorage.getItem("theme") === "dark"
   );
+
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredStudents, setFilteredStudents] = useState([]);
+
+  useEffect(() => {
+    if (atoken) {
+      getStudents();
+    }
+  }, [atoken]);
+
+  useEffect(() => {
+    setFilteredStudents(
+      students.filter((student) =>
+        student.name.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    );
+  }, [searchQuery, students]);
 
   // Apply dark mode on mount
   useEffect(() => {
@@ -45,9 +44,7 @@ const Students = () => {
     navigate(`/students/edit-student/${id}`);
   };
 
-  const handleDelete = (id) => {
-    
-  };
+  const handleDelete = (id) => {};
 
   return (
     <div className="p-6 dark:bg-gray-900 min-h-screen transition-colors duration-300">
@@ -65,24 +62,36 @@ const Students = () => {
         </button>
       </header>
 
+      {/* Search Bar */}
+      <div className="flex items-center mb-4 bg-gray-100 dark:bg-gray-800 p-3 rounded-lg shadow-md">
+        <FaSearch className="text-gray-500 dark:text-gray-300 mr-3" />
+        <input
+          type="text"
+          placeholder="Search by name..."
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          className="w-full bg-transparent outline-none text-gray-800 dark:text-gray-200"
+        />
+      </div>
+
       {/* Students Table */}
       <div className="overflow-x-auto">
         <motion.table className="min-w-full bg-white dark:bg-gray-800 shadow-lg rounded-lg">
           <thead className="bg-gray-100 dark:bg-gray-700">
             <tr>
-              <th className="p-3 text-left text-gray-600 border border-gray-300 dark:text-gray-300">
+              <th className="p-3 text-center text-gray-600 border border-gray-300 dark:text-gray-300">
                 Name
               </th>
-              <th className="p-3 text-left text-gray-600 border border-gray-300 dark:text-gray-300">
+              <th className="p-3 text-center text-gray-600 border border-gray-300 dark:text-gray-300">
                 Email
               </th>
-              <th className="p-3 text-left text-gray-600 border border-gray-300 dark:text-gray-300">
+              <th className="p-3 text-center text-gray-600 border border-gray-300 dark:text-gray-300">
                 Class
               </th>
-              <th className="p-3 text-left text-gray-600 border border-gray-300 dark:text-gray-300">
+              <th className="p-3 text-center text-gray-600 border border-gray-300 dark:text-gray-300">
                 Section
               </th>
-              <th className="p-3 text-left text-gray-600 border border-gray-300 dark:text-gray-300">
+              <th className="p-3 text-center text-gray-600 border border-gray-300 dark:text-gray-300">
                 Roll
               </th>
               <th className="p-3 text-center text-gray-600 border border-gray-300 dark:text-gray-300">
@@ -91,31 +100,31 @@ const Students = () => {
             </tr>
           </thead>
           <tbody>
-            {students.map((student) => (
+            {filteredStudents.map((student) => (
               <tr
-                key={student.id}
+                key={student._id}
                 className="border-t dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700"
               >
-                <td className="p-3 text-gray-700 border dark:text-gray-200">
+                <td className="p-3 text-gray-700 border text-center dark:text-gray-200">
                   {student.name}
                 </td>
-                <td className="p-3 text-gray-700 border dark:text-gray-200">
+                <td className="p-3 text-gray-700 border text-center dark:text-gray-200">
                   {student.email}
                 </td>
-                <td className="p-3 text-gray-700 border dark:text-gray-200">
+                <td className="p-3 text-gray-700 border text-center dark:text-gray-200">
                   {student.class}
                 </td>
-                <td className="p-3 text-gray-700 border dark:text-gray-200">
+                <td className="p-3 text-gray-700 border text-center dark:text-gray-200">
                   {student.section}
                 </td>
-                <td className="p-3 text-gray-700 border dark:text-gray-200">
+                <td className="p-3 text-gray-700 border text-center dark:text-gray-200">
                   {student.roll}
                 </td>
                 <td className="p-4 text-center border">
                   <div className="flex justify-center items-center gap-4">
                     {/* Edit Button */}
                     <button
-                      onClick={handleEdit(student._id)}
+                      onClick={() => handleEdit(student._id)}
                       className="text-yellow-500 hover:text-yellow-400 transition"
                       title="Edit"
                     >
@@ -123,7 +132,7 @@ const Students = () => {
                     </button>
                     {/* Delete Button */}
                     <button
-                      onClick={handleDelete(student._id)}
+                      onClick={() => handleDelete(student._id)}
                       className="text-red-500 hover:text-red-400 transition"
                       title="Delete"
                     >

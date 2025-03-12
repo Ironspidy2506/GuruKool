@@ -138,6 +138,7 @@ const AddStudent = () => {
                   name="email"
                   placeholder="Email"
                   value={newStudent.email}
+                  required
                   onChange={handleInputChange}
                   className="p-3 border dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
                 />
@@ -147,6 +148,7 @@ const AddStudent = () => {
                 <input
                   type="date"
                   name="dob"
+                  required
                   value={newStudent.dob}
                   onChange={handleInputChange}
                   className="p-3 border dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
@@ -157,6 +159,7 @@ const AddStudent = () => {
                 <select
                   name="gender"
                   value={newStudent.gender}
+                  required
                   onChange={handleInputChange}
                   className="p-3 border dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
                 >
@@ -171,6 +174,7 @@ const AddStudent = () => {
                 <input
                   type="tel"
                   name="phone"
+                  required
                   placeholder="Phone Number"
                   value={newStudent.phone}
                   onChange={handleInputChange}
@@ -183,6 +187,7 @@ const AddStudent = () => {
                   name="address"
                   placeholder="Enter Address"
                   value={newStudent.address}
+                  required
                   onChange={handleInputChange}
                   className="p-3 border dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
                 />
@@ -192,6 +197,7 @@ const AddStudent = () => {
                 <select
                   name="class"
                   value={newStudent.class}
+                  required
                   onChange={handleInputChange}
                   className="p-3 border dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
                 >
@@ -209,6 +215,7 @@ const AddStudent = () => {
                   type="text"
                   name="section"
                   placeholder="Section"
+                  required
                   value={newStudent.section}
                   onChange={handleInputChange}
                   className="p-3 border dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
@@ -219,6 +226,7 @@ const AddStudent = () => {
                 <input
                   type="number"
                   name="roll"
+                  required
                   placeholder="Roll Number"
                   value={newStudent.roll}
                   onChange={handleInputChange}
@@ -232,6 +240,7 @@ const AddStudent = () => {
                   type="text"
                   name="admissionNumber"
                   placeholder="Admission Number"
+                  required
                   value={newStudent.admissionNumber}
                   onChange={handleInputChange}
                   className="p-3 border dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
@@ -251,6 +260,7 @@ const AddStudent = () => {
                   type="text"
                   name="fatherName"
                   placeholder="Father Name"
+                  required
                   value={newStudent.fatherName}
                   onChange={handleInputChange}
                   className="p-3 border dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
@@ -262,6 +272,7 @@ const AddStudent = () => {
                   type="tel"
                   name="fatherContact"
                   placeholder="Father Contact"
+                  required
                   value={newStudent.fatherContact}
                   onChange={handleInputChange}
                   className="p-3 border dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
@@ -274,6 +285,7 @@ const AddStudent = () => {
                   name="motherName"
                   placeholder="Mother Name"
                   value={newStudent.motherName}
+                  required
                   onChange={handleInputChange}
                   className="p-3 border dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"
                 />
@@ -284,6 +296,7 @@ const AddStudent = () => {
                   type="tel"
                   name="motherContact"
                   placeholder="Mother Contact"
+                  required
                   value={newStudent.motherContact}
                   onChange={handleInputChange}
                   className="p-3 border dark:border-gray-600 dark:bg-gray-700 dark:text-gray-200 rounded-md focus:outline-none focus:ring-2 focus:ring-green-500"

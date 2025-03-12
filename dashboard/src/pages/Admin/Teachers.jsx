@@ -3,32 +3,24 @@ import { FaEdit, FaTrash } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 
-// Sample student data (Replace with API fetch)
-const sampleStudents = [
-  {
-    id: 1,
-    name: "John Doe",
-    email: "john@example.com",
-    class: "10",
-    section: "A",
-    roll: 101,
-  },
-  {
-    id: 2,
-    name: "Jane Smith",
-    email: "jane@example.com",
-    class: "12",
-    section: "B",
-    roll: 202,
-  },
-];
-
 const Teachers = () => {
   const navigate = useNavigate();
-  const [students, setStudents] = useState(sampleStudents);
+  const { atoken, teachers, setTeachers, getTeachers } =
+    useContext(AdminContext);
   const [darkMode, setDarkMode] = useState(
     localStorage.getItem("theme") === "dark"
   );
+
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredTeachers, setFilteredTeachers] = useState([]);
+
+  useEffect(() => {
+    setFilteredTeachers(
+      teachers.filter((teacher) =>
+        teacher.name.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    );
+  }, [searchQuery, teachers]);
 
   // Apply dark mode on mount
   useEffect(() => {
@@ -83,7 +75,7 @@ const Teachers = () => {
             </tr>
           </thead>
           <tbody>
-            {students.map((student) => (
+            {students.map((teacher) => (
               <tr
                 key={student.id}
                 className="border-t dark:border-gray-700 hover:bg-gray-100 dark:hover:bg-gray-700"

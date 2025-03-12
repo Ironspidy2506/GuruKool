@@ -1,11 +1,28 @@
 import Student from "../models/Student.js";
 
+// To get all students
+const getStudents = async (req, res) => {
+  try {
+    const students = await Student.find({});
+
+    return res.json({
+      success: true,
+      students,
+    });
+  } catch (error) {
+    return res.json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
 // To get a student by id
 const getStudentById = async (req, res) => {
   try {
-    const { _id } = req.body;
+    const { id } = req.params;
 
-    const student = await Student.findById(_id);
+    const student = await Student.findById(id);
     if (!student) {
       return res.json({
         success: false,
@@ -14,7 +31,7 @@ const getStudentById = async (req, res) => {
     }
 
     return res.json({
-      success: false,
+      success: true,
       student,
     });
   } catch (error) {
@@ -131,4 +148,4 @@ const deleteStudent = async (req, res) => {
   }
 };
 
-export { getStudentById, addStudent, editStudent, deleteStudent };
+export { getStudents, getStudentById, addStudent, editStudent, deleteStudent };

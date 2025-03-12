@@ -13,7 +13,9 @@ import AutoLogout from "./utils/AutoLogout.jsx";
 import Students from "./pages/Admin/Students.jsx";
 import Teachers from "./pages/Admin/Teachers.jsx";
 import AddStudent from "./components/Students/AddStudent.jsx";
+import EditStudent from "./components/Students/EditStudent.jsx";
 import AddTeacher from "./components/Teachers/AddTeacher.jsx";
+import EditTeacher from "./components/Teachers/EditTeacher.jsx";
 
 const App = () => {
   const { atoken } = useContext(AdminContext);
@@ -62,16 +64,21 @@ const App = () => {
               <Route path="/admin-dashboard" element={<Dashboard />} />
               <Route path="/students" element={<Students />} />
               <Route path="/students/add-student" element={<AddStudent />} />
+              <Route
+                path="/students/edit-student/:id"
+                element={<EditStudent />}
+              />
+
               <Route path="/teachers" element={<Teachers />} />
               <Route path="/teachers/add-teacher" element={<AddTeacher />} />
-
-
+              <Route
+                path="/teachers/edit-teacher/:id"
+                element={<EditTeacher />}
+              />
 
               {/* Employee Routes */}
-              
 
               {/* Manager Routes */}
-              
             </Routes>
           </div>
         </div>
