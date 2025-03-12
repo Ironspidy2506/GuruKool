@@ -4,6 +4,7 @@ import "dotenv/config";
 import cookieParser from "cookie-parser";
 import dbConnect from "./config/db.js";
 import loginRouter from "./routes/loginRouter.js";
+import studentRouter from "./routes/studentRouter.js";
 
 // Declaring app
 const app = express();
@@ -21,6 +22,8 @@ app.use(
 
 // API's
 app.use("/api/login", loginRouter);
+app.use("/api/students", studentRouter);
+
 
 // First API Testing
 app.get("/", (req, res) => {

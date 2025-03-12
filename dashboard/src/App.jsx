@@ -4,31 +4,16 @@ import Login from "./pages/Login.jsx";
 import Navbar from "./components/Navbar.jsx";
 import Sidebar from "./components/Sidebar.jsx";
 import Dashboard from "./pages/Admin/Dashboard.jsx";
-import EmployeeTasks from "./pages/Users/EmployeeTasks.jsx";
-import EmployeeProjects from "./pages/Users/EmployeeProjects.jsx";
-import EmployeeProfile from "./pages/Users/EmployeeProfile.jsx";
-import EmployeeDashboard from "./pages/Users/EmployeeDashboard.jsx";
-import EmployeePerformance from "./pages/Users/EmployeePerformance.jsx";
 import { AdminContext } from "./context/AdminContext.jsx";
 import { UserContext } from "./context/UserContext.jsx";
 import { ManagerContext } from "./context/ManagerContext.jsx";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import ManagerTasks from "./pages/Manager/ManagerTasks.jsx";
-import ManagerProjects from "./pages/Manager/ManagerProjects.jsx";
-import ManagerDashboard from "./pages/Manager/ManagerDashboard.jsx";
-import ManagerProfile from "./pages/Manager/ManagerProfile.jsx";
-import ManagerPerformance from "./pages/Manager/ManagerPerformance.jsx";
-import ManagerEmployees from "./pages/Manager/ManagerEmployees.jsx";
-import ManagerEmployeeTasks from "./pages/Manager/ManagerEmployeeTasks.jsx";
-import ManagerEmployeePerformances from "./pages/Manager/ManagerEmployeePerformances.jsx";
-import ManagerCostLog from "./pages/Manager/ManagerCostLog.jsx";
-import EmployeeLogs from "./pages/Users/EmployeeLogs.jsx";
-import ManagerLogs from "./pages/Manager/ManagerLogs.jsx";
-import ManagerEmployeeLogs from "./pages/Manager/ManagerEmployeeLogs.jsx";
 import AutoLogout from "./utils/AutoLogout.jsx";
 import Students from "./pages/Admin/Students.jsx";
 import Teachers from "./pages/Admin/Teachers.jsx";
+import AddStudent from "./components/Students/AddStudent.jsx";
+import AddTeacher from "./components/Teachers/AddTeacher.jsx";
 
 const App = () => {
   const { atoken } = useContext(AdminContext);
@@ -76,50 +61,17 @@ const App = () => {
               />
               <Route path="/admin-dashboard" element={<Dashboard />} />
               <Route path="/students" element={<Students />} />
+              <Route path="/students/add-student" element={<AddStudent />} />
               <Route path="/teachers" element={<Teachers />} />
+              <Route path="/teachers/add-teacher" element={<AddTeacher />} />
+
 
 
               {/* Employee Routes */}
-              <Route
-                path="/employee-dashboard"
-                element={<EmployeeDashboard />}
-              />
-              <Route path="/employee-projects" element={<EmployeeProjects />} />
-              <Route path="/employee-tasks" element={<EmployeeTasks />} />
-              <Route path="/employee-profile" element={<EmployeeProfile />} />
-              <Route
-                path="/employee-performance"
-                element={<EmployeePerformance />}
-              />
-              <Route path="/employee-logs" element={<EmployeeLogs />} />
+              
 
               {/* Manager Routes */}
-              <Route path="/manager-dashboard" element={<ManagerDashboard />} />
-              <Route path="/manager-projects" element={<ManagerProjects />} />
-              <Route
-                path="/manager-projects/cost-log"
-                element={<ManagerCostLog />}
-              />
-              <Route path="/manager-tasks" element={<ManagerTasks />} />
-              <Route
-                path="/manager-tasks/employee-tasks"
-                element={<ManagerEmployeeTasks />}
-              />
-              <Route path="/manager-profile" element={<ManagerProfile />} />
-              <Route
-                path="/manager-performance"
-                element={<ManagerPerformance />}
-              />
-              <Route
-                path="/manager-performance/employee-performances"
-                element={<ManagerEmployeePerformances />}
-              />
-              <Route path="/manager-employees" element={<ManagerEmployees />} />
-              <Route path="/manager-logs" element={<ManagerLogs />} />
-              <Route
-                path="/manager-logs/employee-logs"
-                element={<ManagerEmployeeLogs />}
-              />
+              
             </Routes>
           </div>
         </div>
